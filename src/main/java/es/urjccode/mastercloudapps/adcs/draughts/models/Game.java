@@ -64,7 +64,7 @@ public class Game {
 			this.board.remove(target);
 			this.board.put(target, new Draught(colorOriginPiece));
 		}
-		if (!isEatingMovement && this.eatingMovements < 3) {
+		if (!isEatingMovement || this.eatingMovements == 3) {
 			this.turn.change();
 		}
 	}
