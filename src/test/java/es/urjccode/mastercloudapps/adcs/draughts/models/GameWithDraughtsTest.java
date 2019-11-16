@@ -174,6 +174,26 @@ public class GameWithDraughtsTest {
         assertEquals(Color.BLACK, this.game.getColor());
     }
 
+    @Test
+    public void testGivenGameWhenDraughtEatingOneMovementAndMoveWithoutEatingThenNextTurnChange() {
+        Coordinate origin = new Coordinate(0, 3);
+        Coordinate target = new Coordinate(3, 0);
+        Coordinate secondTarget = new Coordinate(5, 2);
+        this.game = new GameBuilder()
+            .row("   B    ")
+            .row("        ")
+            .row(" n      ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .build();
+        this.game.move(origin, target);
+        this.game.move(target, secondTarget);
+        assertEquals(Color.BLACK, this.game.getColor());
+    }
+
     @Test()
     public void testGivenGameWhenDraughtEatingTwoPiecesWithThreePositionsMovementThenEatingEmptyError() {
         Coordinate origin = new Coordinate(0, 3);
