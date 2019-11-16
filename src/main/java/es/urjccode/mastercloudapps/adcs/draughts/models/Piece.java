@@ -10,10 +10,6 @@ public class Piece implements Cloneable {
 		this.color = color;
 	}
 
-	Piece(Piece that) {
-		this(that.color);
-	}
-
 	Error isCorrect(Coordinate origin, Coordinate target, PieceProvider pieceProvider) {
 		if (!origin.isDiagonal(target)) {
 			return Error.NOT_DIAGONAL;
