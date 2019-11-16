@@ -94,7 +94,7 @@ public class GameWithDraughtsTest {
     }
 
     @Test
-    public void testGivenGameWhenDraughtEatingTwoPiecesThenCorrect() {
+    public void testGivenGameWhenDraughtEatingAPieceWithThreePositionsMovementThenCorrect() {
         Coordinate origin = new Coordinate(0, 3);
         Coordinate target = new Coordinate(3, 0);
         this.game = new GameBuilder()
