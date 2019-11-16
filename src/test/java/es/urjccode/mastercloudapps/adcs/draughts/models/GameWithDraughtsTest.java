@@ -53,11 +53,12 @@ public class GameWithDraughtsTest {
         assertEquals(this.game.getPiece(target).getClass(), Draught.class);
     }
 
+    @Test
     public void testGivenGameWhenDraughtMoveSevenSquaresThenCorrect() {
-        Coordinate origin = new Coordinate(0, 0);
-        Coordinate target = new Coordinate(7, 7);
+        Coordinate origin = new Coordinate(0, 7);
+        Coordinate target = new Coordinate(7, 0);
         this.game = new GameBuilder()
-            .row("B       ")
+            .row("       B")
             .row("        ")
             .row("        ")
             .row("        ")
