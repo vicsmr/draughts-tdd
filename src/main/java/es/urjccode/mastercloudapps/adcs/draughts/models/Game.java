@@ -46,10 +46,11 @@ public class Game {
 		if (origin.diagonalDistance(target) == 2) {
 			this.board.remove(origin.betweenDiagonal(target));
 		}
+		Color colorOriginPiece = this.getColor(origin);
 		this.board.move(origin, target);
 		if (this.board.getPiece(target).isLimit(target)){
 			this.board.remove(target);
-			this.board.put(target, new Draught(Color.WHITE));
+			this.board.put(target, new Draught(colorOriginPiece));
 		}
 		this.turn.change();
 	}
