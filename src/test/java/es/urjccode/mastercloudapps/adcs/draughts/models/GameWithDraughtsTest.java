@@ -153,7 +153,7 @@ public class GameWithDraughtsTest {
     }
 
     @Test
-    public void testGivenGameWhenDraughtEatingThreeMovementThenNextTurnNotChange() {
+    public void testGivenGameWhenDraughtEatingThreeMovementThenNextTurnChange() {
         Coordinate origin = new Coordinate(0, 3);
         Coordinate target = new Coordinate(3, 0);
         Coordinate secondTarget = new Coordinate(5, 2);
