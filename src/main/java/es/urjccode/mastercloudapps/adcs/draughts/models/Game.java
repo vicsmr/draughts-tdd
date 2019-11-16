@@ -4,10 +4,12 @@ public class Game {
 
 	private Board board;
 	private Turn turn;
+	private int eatingMovements;
 
 	public Game() {
 		this.turn = new Turn();
 		this.board = new Board();
+		this.eatingMovements = 0;
 		for (int i = 0; i < this.board.getDimension(); i++) {
 			for (int j = 0; j < this.board.getDimension(); j++) {
 				Coordinate coordinate = new Coordinate(i, j);
@@ -43,12 +45,15 @@ public class Game {
 
 	public void move(Coordinate origin, Coordinate target) {
 		assert this.isCorrect(origin, target) == null;
+		boolean isEatingMovement = false;
 		if (origin.diagonalDistance(target) > 1) {
 			Coordinate coordinateToRemove = origin.betweenDiagonal(target);
 			do {
 				Piece piece = this.board.getPiece(coordinateToRemove);
 				if (piece != null) {
 					this.board.remove(coordinateToRemove);
+					this.eatingMovements++;
+					isEatingMovement = true;
 				}
 				coordinateToRemove = coordinateToRemove.betweenDiagonal(target);
 			} while(coordinateToRemove.diagonalDistance(target) > 0 );
@@ -59,7 +64,9 @@ public class Game {
 			this.board.remove(target);
 			this.board.put(target, new Draught(colorOriginPiece));
 		}
-		this.turn.change();
+		if (!isEatingMovement && this.eatingMovements < 3) {
+			this.turn.change();
+		}
 	}
 
 	public Error isCorrect(Coordinate origin, Coordinate target){
