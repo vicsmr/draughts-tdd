@@ -52,6 +52,26 @@ public class GameWithDraughtsTest {
         assertEquals(Color.WHITE, this.game.getColor(target));
         assertEquals(this.game.getPiece(target).getClass(), Draught.class);
     }
+    
+    @Test
+    public void testGivenGameWhenDraughtMoveOneSquareThenCorrect() {
+        Coordinate origin = new Coordinate(0, 7);
+        Coordinate target = new Coordinate(1, 6);
+        this.game = new GameBuilder()
+            .row("       B")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .build();
+        this.game.move(origin, target);
+        assertNull(this.game.getPiece(origin));
+        assertNotNull(this.game.getPiece(target));
+        assertEquals(Color.WHITE, this.game.getColor(target));
+    }
 
     @Test
     public void testGivenGameWhenDraughtMoveSevenSquaresThenCorrect() {
