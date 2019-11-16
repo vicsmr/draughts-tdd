@@ -1,6 +1,6 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
-public class Piece {
+public class Piece implements Cloneable {
 
 	private Color color;
 	private static final int MAX_DISTANCE = 2;
@@ -8,6 +8,10 @@ public class Piece {
 	Piece(Color color) {
 		assert color != null;
 		this.color = color;
+	}
+
+	Piece(Piece that) {
+		this(that.color);
 	}
 
 	Error isCorrect(Coordinate origin, Coordinate target, PieceProvider pieceProvider) {

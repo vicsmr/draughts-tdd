@@ -109,14 +109,22 @@ public class GameTest {
 
     @Test
     public void testGivenGameWhenMovementThenEatPiece() {
-        assertNull(this.advance(new Coordinate[][] { 
-            { new Coordinate(5, 0), new Coordinate(4, 1) },
-            { new Coordinate(2, 1), new Coordinate(3, 0) }, 
-            { new Coordinate(5, 2), new Coordinate(4, 3) },
-            { new Coordinate(3, 0), new Coordinate(5, 2) }, }));
-        assertNull(game.getColor(new Coordinate(3, 0)));
-        assertNull(game.getColor(new Coordinate(4, 1)));
-        assertEquals(Color.BLACK, game.getColor(new Coordinate(5, 2)));
+        Coordinate origin = new Coordinate(4, 0);
+        Coordinate target = new Coordinate(2, 2);
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row(" n      ")
+            .row("b       ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .build();
+        game.move(origin, target);
+        assertNull(game.getColor(origin));
+        assertNull(game.getColor(new Coordinate(3, 1)));
+        assertEquals(Color.WHITE, game.getColor(target));
     }
 
     @Test
