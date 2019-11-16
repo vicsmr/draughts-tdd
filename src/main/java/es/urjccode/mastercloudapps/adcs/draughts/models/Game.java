@@ -71,6 +71,20 @@ public class Game {
 		if (this.turn.getColor() != this.board.getColor(origin)) {
 			return Error.OPPOSITE_PIECE;
 		}
+		if (origin.diagonalDistance(target) > 2) {
+			int piecesBetween = 0;
+			Coordinate coordinateToRemove = origin.betweenDiagonal(target);
+			do {
+				Piece piece = this.board.getPiece(coordinateToRemove);
+				if (piece != null) {
+					piecesBetween++;
+				}
+				coordinateToRemove = coordinateToRemove.betweenDiagonal(target);
+			} while(coordinateToRemove.diagonalDistance(target) > 0 );
+			if (piecesBetween > 1) {
+				return Error.EATING_SEVERAL;
+			}
+		}
 		return this.board.getPiece(origin).isCorrect(origin, target, board);
 	}
 

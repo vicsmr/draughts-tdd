@@ -18,7 +18,7 @@ class Draught extends Piece {
 		int distance = origin.diagonalDistance(target);
 		if (distance > Draught.MAX_DISTANCE) {
 			return Error.BAD_DISTANCE;
-		}
+        }
 		return null;
 	}
 

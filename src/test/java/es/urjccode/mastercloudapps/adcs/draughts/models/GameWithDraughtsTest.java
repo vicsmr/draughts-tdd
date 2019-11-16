@@ -109,11 +109,27 @@ public class GameWithDraughtsTest {
             .build();
         this.game.move(origin, target);
         assertNull(this.game.getPiece(origin));
-        assertNull(this.game.getPiece(new Coordinate(1, 2)));
         assertNull(this.game.getPiece(new Coordinate(2, 1)));
         assertNotNull(this.game.getPiece(target));
         assertEquals(Color.WHITE, this.game.getColor(target));
         assertEquals(this.game.getPiece(target).getClass(), Draught.class);
+    }
+
+    @Test()
+    public void testGivenGameWhenDraughtEatingTwoPiecesWithThreePositionsMovementThenEatingEmptyError() {
+        Coordinate origin = new Coordinate(0, 3);
+        Coordinate target = new Coordinate(3, 0);
+        this.game = new GameBuilder()
+            .row("   B    ")
+            .row("  n     ")
+            .row(" n      ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .build();
+        assertEquals(Error.EATING_SEVERAL, this.game.isCorrect(origin, target));
     }
 
     @Test
