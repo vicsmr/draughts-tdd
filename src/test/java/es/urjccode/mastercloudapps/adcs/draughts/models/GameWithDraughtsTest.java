@@ -32,7 +32,7 @@ public class GameWithDraughtsTest {
     }
 
     @Test
-    public void testGivenGameWhenPawnAtLimitAndEatingThenNewDraugts() {
+    public void testGivenGameWhenWhitePawnAtLimitAndEatingThenNewDraugts() {
         Coordinate origin = new Coordinate(2, 1);
         Coordinate target = new Coordinate(0, 3);
         this.game = new GameBuilder()
@@ -70,6 +70,29 @@ public class GameWithDraughtsTest {
         this.game.move(new Coordinate(2, 1), new Coordinate(1, 2));
         this.game.move(origin, target);
         assertNull(this.game.getPiece(origin));
+        assertNotNull(this.game.getPiece(target));
+        assertEquals(Color.BLACK, this.game.getColor(target));
+        assertEquals(this.game.getPiece(target).getClass(), Draught.class);
+    }
+
+    @Test
+    public void testGivenGameWhenBlackPawnAtLimitAndEatingThenNewDraugts() {
+        Coordinate origin = new Coordinate(5, 4);
+        Coordinate target = new Coordinate(7, 2);
+        this.game = new GameBuilder()
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("    n   ")
+            .row("        ")
+            .row("  b     ")
+            .build();
+        this.game.move(target, new Coordinate(6, 3));
+        this.game.move(origin, target);
+        assertNull(this.game.getPiece(origin));
+        assertNull(this.game.getPiece(new Coordinate(1, 2)));
         assertNotNull(this.game.getPiece(target));
         assertEquals(Color.BLACK, this.game.getColor(target));
         assertEquals(this.game.getPiece(target).getClass(), Draught.class);
