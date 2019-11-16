@@ -43,8 +43,15 @@ public class Game {
 
 	public void move(Coordinate origin, Coordinate target) {
 		assert this.isCorrect(origin, target) == null;
-		if (origin.diagonalDistance(target) == 2) {
-			this.board.remove(origin.betweenDiagonal(target));
+		if (origin.diagonalDistance(target) > 1) {
+			Coordinate coordinateToRemove = origin.betweenDiagonal(target);
+			do {
+				Piece piece = this.board.getPiece(coordinateToRemove);
+				if (piece != null) {
+					this.board.remove(coordinateToRemove);
+				}
+				coordinateToRemove = coordinateToRemove.betweenDiagonal(target);
+			} while(coordinateToRemove.diagonalDistance(target) > 0 );
 		}
 		Color colorOriginPiece = this.getColor(origin);
 		this.board.move(origin, target);

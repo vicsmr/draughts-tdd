@@ -43,7 +43,6 @@ public class Coordinate {
 
     Coordinate betweenDiagonal(Coordinate coordinate) {
         assert coordinate != null;
-        assert this.diagonalDistance(coordinate) == 2;
         int rowShift = 1;
         if (coordinate.row - this.row < 0) {
             rowShift = -1;
