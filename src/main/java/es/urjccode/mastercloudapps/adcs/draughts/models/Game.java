@@ -58,14 +58,18 @@ public class Game {
 				coordinateToRemove = coordinateToRemove.betweenDiagonal(target);
 			} while(coordinateToRemove.diagonalDistance(target) > 0 );
 		}
-		Color colorOriginPiece = this.getColor(origin);
-		this.board.move(origin, target);
-		if (this.board.getPiece(target).isLimit(target)){
-			this.board.remove(target);
-			this.board.put(target, new Draught(colorOriginPiece));
-		}
-		if (!isEatingMovement || this.eatingMovements == 3) {
+		if (!isEatingMovement && eatingMovements > 0) {
 			this.turn.change();
+		} else {
+			Color colorOriginPiece = this.getColor(origin);
+			this.board.move(origin, target);
+			if (this.board.getPiece(target).isLimit(target)){
+				this.board.remove(target);
+				this.board.put(target, new Draught(colorOriginPiece));
+			}
+			if (!isEatingMovement || this.eatingMovements == 3) {
+				this.turn.change();
+			}
 		}
 	}
 

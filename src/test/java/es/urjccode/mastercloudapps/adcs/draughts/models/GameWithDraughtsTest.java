@@ -191,6 +191,8 @@ public class GameWithDraughtsTest {
             .build();
         this.game.move(origin, target);
         this.game.move(target, secondTarget);
+        assertNull(this.game.getPiece(secondTarget));
+        assertNotNull(this.game.getPiece(target));
         assertEquals(Color.BLACK, this.game.getColor());
     }
 
