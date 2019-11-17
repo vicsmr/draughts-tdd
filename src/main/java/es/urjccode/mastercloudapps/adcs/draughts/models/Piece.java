@@ -3,7 +3,6 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 public class Piece implements Cloneable {
 
 	private Color color;
-	private static final int MAX_DISTANCE = 2;
 
 	Piece(Color color) {
 		assert color != null;
@@ -17,22 +16,10 @@ public class Piece implements Cloneable {
 		if (!pieceProvider.isEmpty(target)) {
 			return Error.NOT_EMPTY_TARGET;
 		}
-		if (!this.isAdvanced(origin, target)) {
-			return Error.NOT_ADVANCED;
-		}
-		int distance = origin.diagonalDistance(target);
-		if (distance > Piece.MAX_DISTANCE) {
-			return Error.BAD_DISTANCE;
-		}
-		if (distance == Piece.MAX_DISTANCE) {
-			if (pieceProvider.getPiece(origin.betweenDiagonal(target)) == null) {
-				return Error.EATING_EMPTY;
-			}
-		}
 		return null;
 	}
 
-	boolean isLimit(Coordinate coordinate){
+	boolean isLimit(Coordinate coordinate) {
 		return coordinate.getRow()== 0 && this.getColor() == Color.WHITE ||
 		coordinate.getRow()== 7 && this.getColor() == Color.BLACK;
 	}

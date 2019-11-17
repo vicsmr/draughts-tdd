@@ -9,12 +9,10 @@ class Draught extends Piece {
     }
 
     Error isCorrect(Coordinate origin, Coordinate target, PieceProvider pieceProvider) {
-		if (!origin.isDiagonal(target)) {
-			return Error.NOT_DIAGONAL;
-		}
-		if (!pieceProvider.isEmpty(target)) {
-			return Error.NOT_EMPTY_TARGET;
-		}
+		Error error = super.isCorrect(origin, target, pieceProvider);
+        if (error != null) {
+            return error;
+        }
 		int distance = origin.diagonalDistance(target);
 		if (distance > Draught.MAX_DISTANCE) {
 			return Error.BAD_DISTANCE;

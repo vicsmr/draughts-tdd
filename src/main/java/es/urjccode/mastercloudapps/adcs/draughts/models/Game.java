@@ -13,9 +13,9 @@ public class Game {
 		for (int i = 0; i < this.board.getDimension(); i++) {
 			for (int j = 0; j < this.board.getDimension(); j++) {
 				Coordinate coordinate = new Coordinate(i, j);
-				Piece piece = this.getInitialPiece(coordinate);
-				if (piece != null) {
-					this.board.put(coordinate, piece);
+				Pawn pawn = this.getInitialPiece(coordinate);
+				if (pawn != null) {
+					this.board.put(coordinate, pawn);
 				}
 			}
 		}
@@ -26,7 +26,7 @@ public class Game {
 		this.turn = new Turn();
 	}
 
-	private Piece getInitialPiece(Coordinate coordinate) {
+	private Pawn getInitialPiece(Coordinate coordinate) {
 		assert coordinate != null;
 		if (coordinate.isBlack()) {
 			final int row = coordinate.getRow();
@@ -37,7 +37,7 @@ public class Game {
 				color = Color.WHITE;
 			}
 			if (color != null) {
-				return new Piece(color);
+				return new Pawn(color);
 			}
 		}
 		return null;
