@@ -19,6 +19,8 @@ class PlayView extends SubView {
     void interact(PlayController playController) {
         assert playController != null;
         Error errorOption;
+        this.console.writeln("1) Mover");
+        this.console.writeln("2) Cancelar");
         do {
             errorOption = null;
             String command = this.console.readString("Elige opción: ");
