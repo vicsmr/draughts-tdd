@@ -13,11 +13,11 @@ class Turn {
     }
 
     boolean isColor(Color color2) {
-		return false;
+		  return false;
     }
     
     Color getColor() {
-		return this.color;
+		  return this.color;
     }
 
     Color getOppositeColor() {

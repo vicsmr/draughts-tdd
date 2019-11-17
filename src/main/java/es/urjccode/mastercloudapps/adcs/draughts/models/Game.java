@@ -58,7 +58,7 @@ public class Game {
 				coordinateToRemove = coordinateToRemove.betweenDiagonal(target);
 			} while(coordinateToRemove.diagonalDistance(target) > 0 );
 		}
-		if ((!isEatingMovement && eatingMovements > 0)) {
+		if (!isEatingMovement && eatingMovements > 0) {
 			this.changeTurn();
 		} else {
 			this.doMovement(isEatingMovement, origin, target);
