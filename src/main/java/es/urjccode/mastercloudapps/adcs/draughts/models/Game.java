@@ -59,18 +59,27 @@ public class Game {
 			} while(coordinateToRemove.diagonalDistance(target) > 0 );
 		}
 		if (!isEatingMovement && eatingMovements > 0) {
-			this.turn.change();
+			this.changeTurn();
 		} else {
-			Color colorOriginPiece = this.getColor(origin);
-			this.board.move(origin, target);
-			if (this.board.getPiece(target).isLimit(target)){
-				this.board.remove(target);
-				this.board.put(target, new Draught(colorOriginPiece));
-			}
-			if (!isEatingMovement || this.eatingMovements == 3) {
-				this.turn.change();
-			}
+			this.doMovement(isEatingMovement, origin, target);
 		}
+	}
+
+	private void doMovement(boolean isEatingMovement, Coordinate origin, Coordinate target) {
+		Color colorOriginPiece = this.getColor(origin);
+		this.board.move(origin, target);
+		if (this.board.getPiece(target).isLimit(target)){
+			this.board.remove(target);
+			this.board.put(target, new Draught(colorOriginPiece));
+		}
+		if (!isEatingMovement || this.eatingMovements == 3) {
+			this.changeTurn();
+		}
+	}
+
+	private void changeTurn() {
+		this.eatingMovements = 0;
+		this.turn.change();
 	}
 
 	public Error isCorrect(Coordinate origin, Coordinate target){
