@@ -28,6 +28,9 @@ public class PlayViewTest {
     @InjectMocks
     PlayView playView;
 
+    private static final String MOVE = "Mueven las negras: ";
+    private static final String CHOOSE = "Elige opción: ";
+
     @Before
     public void initMocks() {
         MockitoAnnotations.initMocks(this);
@@ -36,28 +39,28 @@ public class PlayViewTest {
     @Test
     public void testGivenPlayViewWhenCorrectFormatThenOk() {
         this.prepareTurnAndDimension();
-        when(console.readString("Mueven las negras: ")).thenReturn("32.41");
+        when(console.readString(PlayViewTest.MOVE)).thenReturn("32.41");
         interactAndVerify();
     }
 
     @Test
     public void testGivenPlayViewWhenInteractWithEmptyThenError() {
         this.prepareTurnAndDimension();
-        when(console.readString("Mueven las negras: ")).thenReturn("").thenReturn("32.41");
+        when(console.readString(PlayViewTest.MOVE)).thenReturn("").thenReturn("32.41");
         interactAndVerify();
     }
 
     @Test
     public void testGivenPlayViewWhenInteractWithBadFormatThenError() {
         this.prepareTurnAndDimension();
-        when(console.readString("Mueven las negras: ")).thenReturn("a3.42").thenReturn("32.41");
+        when(console.readString(PlayViewTest.MOVE)).thenReturn("a3.42").thenReturn("32.41");
         interactAndVerify();
     }
 
     @Test
     public void testGivenPlayViewWhenInteractWithBadRangeThenError() {
         this.prepareTurnAndDimension();
-        when(console.readString("Mueven las negras: ")).thenReturn("93.49").thenReturn("32.41");
+        when(console.readString(PlayViewTest.MOVE)).thenReturn("93.49").thenReturn("32.41");
         interactAndVerify();
     }
 
@@ -69,18 +72,18 @@ public class PlayViewTest {
     private void prepareTurnAndDimension() {
         when(playController.getColor()).thenReturn(Color.BLACK);
         when(playController.getDimension()).thenReturn(8);
-        when(console.readString("Elige opción: ")).thenReturn("1");
+        when(console.readString(PlayViewTest.CHOOSE)).thenReturn("1");
     }
 
     @Test
     public void givenPlayViewWhenCancelGameThenIsCancelled() {
-        when(console.readString("Elige opción: ")).thenReturn("2");
+        when(console.readString(PlayViewTest.CHOOSE)).thenReturn("2");
         interactAndNextState();
     }
 
     @Test
     public void givenPlayViewWhenIsWrongOptionThenRepeatOptionsAndCancelGameThenIsCancelled() {
-        when(console.readString("Elige opción: "))
+        when(console.readString(PlayViewTest.CHOOSE))
         .thenReturn("3")
         .thenReturn("2");
         interactAndNextState();

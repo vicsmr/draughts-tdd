@@ -11,9 +11,9 @@ class PlayView extends SubView {
     private static final String FORMAT = "xx.xx";
     private static final String FORMAT_ERROR = "Error!!! Formato incorrecto";
     private static final String MOVE = "Mueven las ";
-    private final String COMMAND_MOVE = "1) Mover";
-    private final String COMMAND_CANCEL = "2) Cancelar";
-    private final String CHOOSE = "Elige opción: ";
+    private static final String COMMAND_MOVE = "1) Mover";
+    private static final String COMMAND_CANCEL = "2) Cancelar";
+    private static final String CHOOSE = "Elige opción: ";
 
     PlayView() {
         super();
