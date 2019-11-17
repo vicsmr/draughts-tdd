@@ -36,7 +36,6 @@ public class PlayViewTest {
     @Test
     public void testGivenPlayViewWhenCorrectFormatThenOk() {
         this.prepareTurnAndDimension();
-        when(console.readString("Elige opción: ")).thenReturn("1");
         when(console.readString("Mueven las negras: ")).thenReturn("32.41");
         interactAndVerify();
     }
@@ -44,7 +43,6 @@ public class PlayViewTest {
     @Test
     public void testGivenPlayViewWhenInteractWithEmptyThenError() {
         this.prepareTurnAndDimension();
-        when(console.readString("Elige opción: ")).thenReturn("1");
         when(console.readString("Mueven las negras: ")).thenReturn("").thenReturn("32.41");
         interactAndVerify();
     }
@@ -52,7 +50,6 @@ public class PlayViewTest {
     @Test
     public void testGivenPlayViewWhenInteractWithBadFormatThenError() {
         this.prepareTurnAndDimension();
-        when(console.readString("Elige opción: ")).thenReturn("1");
         when(console.readString("Mueven las negras: ")).thenReturn("a3.42").thenReturn("32.41");
         interactAndVerify();
     }
@@ -60,7 +57,6 @@ public class PlayViewTest {
     @Test
     public void testGivenPlayViewWhenInteractWithBadRangeThenError() {
         this.prepareTurnAndDimension();
-        when(console.readString("Elige opción: ")).thenReturn("1");
         when(console.readString("Mueven las negras: ")).thenReturn("93.49").thenReturn("32.41");
         interactAndVerify();
     }
@@ -73,13 +69,13 @@ public class PlayViewTest {
     private void prepareTurnAndDimension() {
         when(playController.getColor()).thenReturn(Color.BLACK);
         when(playController.getDimension()).thenReturn(8);
+        when(console.readString("Elige opción: ")).thenReturn("1");
     }
 
     @Test
     public void givenPlayViewWhenCancelGameThenIsCancelled() {
         when(console.readString("Elige opción: ")).thenReturn("2");
-        playView.interact(playController);
-        verify(playController).nextState();
+        interactAndNextState();
     }
 
     @Test
@@ -87,6 +83,10 @@ public class PlayViewTest {
         when(console.readString("Elige opción: "))
         .thenReturn("3")
         .thenReturn("2");
+        interactAndNextState();
+    }
+
+    private void interactAndNextState() {
         playView.interact(playController);
         verify(playController).nextState();
     }
