@@ -9,5 +9,6 @@ public enum Error {
     NOT_EMPTY_TARGET, 
     NOT_ADVANCED, 
     EATING_EMPTY,
-    EATING_SEVERAL;
+    EATING_SEVERAL,
+    WRONG_OPTION;
 }

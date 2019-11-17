@@ -82,4 +82,13 @@ public class PlayViewTest {
         verify(playController).nextState();
     }
 
+    @Test
+    public void givenPlayViewWhenIsWrongOptionThenRepeatOptionsAndCancelGameThenIsCancelled() {
+        when(console.readString("Elige opción: "))
+        .thenReturn("3")
+        .thenReturn("2");
+        playView.interact(playController);
+        verify(playController).nextState();
+    }
+
 }
