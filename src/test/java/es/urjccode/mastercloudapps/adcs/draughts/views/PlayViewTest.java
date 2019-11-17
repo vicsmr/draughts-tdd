@@ -36,6 +36,7 @@ public class PlayViewTest {
     @Test
     public void testGivenPlayViewWhenCorrectFormatThenOk() {
         when(playController.getColor()).thenReturn(Color.BLACK);
+        when(playController.getDimension()).thenReturn(8);
         when(console.readString("Mueven las negras: ")).thenReturn("32.41");
         playView.interact(playController);
         verify(playController).move(new Coordinate(2, 1), new Coordinate(3, 0));
@@ -44,6 +45,7 @@ public class PlayViewTest {
     @Test
     public void testGivenPlayViewWhenInteractWithEmptyThenError() {
         when(playController.getColor()).thenReturn(Color.BLACK);
+        when(playController.getDimension()).thenReturn(8);
         when(console.readString("Mueven las negras: ")).thenReturn("").thenReturn("32.41");
         playView.interact(playController);
         verify(playController).move(new Coordinate(2, 1), new Coordinate(3, 0));
@@ -52,6 +54,7 @@ public class PlayViewTest {
     @Test
     public void testGivenPlayViewWhenInteractWithBadFormatThenError() {
         when(playController.getColor()).thenReturn(Color.BLACK);
+        when(playController.getDimension()).thenReturn(8);
         when(console.readString("Mueven las negras: ")).thenReturn("a3.42").thenReturn("32.41");
         playView.interact(playController);
         verify(playController).move(new Coordinate(2, 1), new Coordinate(3, 0));
@@ -60,6 +63,7 @@ public class PlayViewTest {
     @Test
     public void testGivenPlayViewWhenInteractWithBadRangeThenError() {
         when(playController.getColor()).thenReturn(Color.BLACK);
+        when(playController.getDimension()).thenReturn(8);
         when(console.readString("Mueven las negras: ")).thenReturn("93.49").thenReturn("32.41");
         playView.interact(playController);
         verify(playController).move(new Coordinate(2, 1), new Coordinate(3, 0));
