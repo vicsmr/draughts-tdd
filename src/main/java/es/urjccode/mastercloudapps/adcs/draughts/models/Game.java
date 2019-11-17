@@ -96,20 +96,25 @@ public class Game {
 			return error;
 		}
 		if (origin.diagonalDistance(target) > 2) {
-			int piecesBetween = 0;
-			Coordinate coordinateToRemove = origin.betweenDiagonal(target);
-			do {
-				Piece piece = this.board.getPiece(coordinateToRemove);
-				if (piece != null) {
-					piecesBetween++;
-				}
-				coordinateToRemove = coordinateToRemove.betweenDiagonal(target);
-			} while(coordinateToRemove.diagonalDistance(target) > 0 );
+			int piecesBetween = this.obtainPiecesBetween(origin, target);
 			if (piecesBetween > 1) {
 				return Error.EATING_SEVERAL;
 			}
 		}
 		return null;
+	}
+
+	private int obtainPiecesBetween(Coordinate origin, Coordinate target) {
+		int piecesBetween = 0;
+		Coordinate coordinateToRemove = origin.betweenDiagonal(target);
+		do {
+			Piece piece = this.board.getPiece(coordinateToRemove);
+			if (piece != null) {
+				piecesBetween++;
+			}
+			coordinateToRemove = coordinateToRemove.betweenDiagonal(target);
+		} while(coordinateToRemove.diagonalDistance(target) > 0 );
+		return piecesBetween;
 	}
 
 	public Color getColor(Coordinate coordinate) {

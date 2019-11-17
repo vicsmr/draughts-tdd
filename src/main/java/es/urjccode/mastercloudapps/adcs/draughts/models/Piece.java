@@ -1,6 +1,6 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
-public class Piece implements Cloneable {
+public class Piece {
 
 	private Color color;
 
