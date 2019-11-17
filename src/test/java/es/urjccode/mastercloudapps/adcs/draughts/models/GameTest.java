@@ -108,7 +108,7 @@ public class GameTest {
     }
 
     @Test
-    public void testGivenGameWhenMovementThenEatPiece() {
+    public void testGivenGameWhenMovementPawnThenEatPiece() {
         Coordinate origin = new Coordinate(4, 0);
         Coordinate target = new Coordinate(2, 2);
         Game game = new GameBuilder()
@@ -125,6 +125,26 @@ public class GameTest {
         assertNull(game.getColor(origin));
         assertNull(game.getColor(new Coordinate(3, 1)));
         assertEquals(Color.WHITE, game.getColor(target));
+    }
+
+    @Test
+    public void testGivenGameWhenTwoMovementPawnEatingPiecesTheNotChangeTurn() {
+        Coordinate origin = new Coordinate(4, 0);
+        Coordinate target = new Coordinate(2, 2);
+        Coordinate secondTarget = new Coordinate(0, 4);
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("   n     ")
+            .row("        ")
+            .row(" n      ")
+            .row("b       ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .build();
+        game.move(origin, target);
+        game.move(target, secondTarget);
+        assertEquals(Color.WHITE, this.game.getColor());
     }
 
     @Test
