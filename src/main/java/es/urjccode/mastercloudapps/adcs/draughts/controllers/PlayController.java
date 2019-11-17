@@ -21,6 +21,10 @@ public class PlayController extends Controller {
 		}
 	}
 
+	public void nextState() {
+		this.state.next();
+	}
+
 	public Error isCorrect(Coordinate origin, Coordinate target){
 		assert origin != null;
 		assert target != null;

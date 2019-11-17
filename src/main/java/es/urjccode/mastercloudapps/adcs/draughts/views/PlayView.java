@@ -18,32 +18,37 @@ class PlayView extends SubView {
 
     void interact(PlayController playController) {
         assert playController != null;
-        Coordinate origin = null;
-        Coordinate target = null;
-        Error error;
-        do {
-            error = null;
-            String color = PlayView.COLORS[playController.getColor().ordinal()];
-            String format = this.console.readString(PlayView.MOVE+ color + ": ");
-            if (format.length() != PlayView.FORMAT.length()) {
-                this.console.write(PlayView.FORMAT_ERROR);
-                error = Error.BAD_FORMAT;
-            } else {
-                origin = Coordinate.getInstance(format.substring(0, 2));
-                target = Coordinate.getInstance(format.substring(3, 5));
-                if (origin == null || target == null) {
+        String command = this.console.readString("Elige opción: ");
+        if ("1".equals(command)) {
+            Coordinate origin = null;
+            Coordinate target = null;
+            Error error;
+            do {
+                error = null;
+                String color = PlayView.COLORS[playController.getColor().ordinal()];
+                String format = this.console.readString(PlayView.MOVE+ color + ": ");
+                if (format.length() != PlayView.FORMAT.length()) {
+                    this.console.write(PlayView.FORMAT_ERROR);
                     error = Error.BAD_FORMAT;
-                } 
+                } else {
+                    origin = Coordinate.getInstance(format.substring(0, 2));
+                    target = Coordinate.getInstance(format.substring(3, 5));
+                    if (origin == null || target == null) {
+                        error = Error.BAD_FORMAT;
+                    } 
+                }
+            } while (error != null);
+            error = playController.isCorrect(origin, target);
+            if (error == null) {
+                playController.move(origin, target);
+                if (playController.isBlocked()) {
+                    this.console.writeln(PlayView.MESSAGE);
+                } else {
+                    new GameView().write(playController);
+                }
             }
-        } while (error != null);
-        error = playController.isCorrect(origin, target);
-        if (error == null) {
-            playController.move(origin, target);
-            if (playController.isBlocked()) {
-                this.console.writeln(PlayView.MESSAGE);
-            } else {
-                new GameView().write(playController);
-            }
+        } else if ("2".equals(command)) {
+            playController.nextState();
         }
     }
 
