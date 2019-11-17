@@ -43,14 +43,8 @@ public class Coordinate {
 
     Coordinate betweenDiagonal(Coordinate coordinate) {
         assert coordinate != null;
-        int rowShift = 1;
-        if (coordinate.row - this.row < 0) {
-            rowShift = -1;
-        }
-        int columnShift = 1;
-        if (coordinate.column - this.column < 0) {
-            columnShift = -1;
-        }
+        int rowShift = coordinate.row - this.row < 0 ? -1 : 1;
+        int columnShift = coordinate.column - this.column < 0 ? -1 : 1;
         return new Coordinate(this.row + rowShift, this.column + columnShift);
     }
 
