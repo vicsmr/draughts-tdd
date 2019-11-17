@@ -17,7 +17,7 @@ public class PlayController extends Controller {
 		assert this.isCorrect(origin, target) == null;
 		this.game.move(origin, target);
 		if (this.game.isBlocked()) {
-			this.state.next();
+			this.nextState();
 		}
 	}
 

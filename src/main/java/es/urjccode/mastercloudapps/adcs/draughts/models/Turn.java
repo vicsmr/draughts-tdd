@@ -19,6 +19,10 @@ class Turn {
     Color getColor() {
 		return this.color;
     }
+
+    Color getOppositeColor() {
+      return this.color.equals(Color.WHITE) ? Color.BLACK : Color.WHITE;
+    }
     
     @Override
     public String toString(){

@@ -7,7 +7,9 @@ import org.junit.Test;
 
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Game;
+import es.urjccode.mastercloudapps.adcs.draughts.models.GameBuilder;
 import es.urjccode.mastercloudapps.adcs.draughts.models.State;
+import es.urjccode.mastercloudapps.adcs.draughts.models.StateValue;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Color;
 
 public class PlayControllerTest {
@@ -23,6 +25,27 @@ public class PlayControllerTest {
         playController.move(origin, target);
         assertNull(playController.getPiece(origin));
         assertEquals(playController.getColor(target), Color.WHITE);
+    }
+
+    @Test
+    public void givenPlayControllerWhenMovementRequiereCorrectThenNotErro() {
+        Game game = new GameBuilder()
+        .row("        ")
+        .row("        ")
+        .row("        ")
+        .row(" n      ")
+        .row("b       ")
+        .row("        ")
+        .row("        ")
+        .row("        ")
+        .build();
+        State state = new State();
+        state.next();
+        PlayController playController = new PlayController(game, state);
+        Coordinate origin = new Coordinate(4, 0);
+        Coordinate target = new Coordinate(2, 2);
+        playController.move(origin, target);
+        assertEquals(StateValue.FINAL, state.getValueState());
     }
 
 }

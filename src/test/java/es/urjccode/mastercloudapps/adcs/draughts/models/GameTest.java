@@ -161,7 +161,7 @@ public class GameTest {
             .row(" n      ")
             .row("b       ")
             .row("        ")
-            .row("        ")
+            .row("    n   ")
             .row("        ")
             .build();
         game.move(origin, target);

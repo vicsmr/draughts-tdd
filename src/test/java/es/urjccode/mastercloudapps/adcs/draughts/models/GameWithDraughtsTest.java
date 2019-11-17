@@ -124,7 +124,7 @@ public class GameWithDraughtsTest {
             .row(" n      ")
             .row("        ")
             .row("        ")
-            .row("        ")
+            .row("     n  ")
             .row("        ")
             .row("        ")
             .build();
@@ -144,7 +144,7 @@ public class GameWithDraughtsTest {
             .row("        ")
             .row(" n      ")
             .row("        ")
-            .row("        ")
+            .row(" n      ")
             .row("        ")
             .build();
         this.game.move(origin, target);
@@ -186,7 +186,7 @@ public class GameWithDraughtsTest {
             .row("        ")
             .row("        ")
             .row("        ")
-            .row("        ")
+            .row("  n     ")
             .row("        ")
             .build();
         this.game.move(origin, target);
@@ -242,7 +242,7 @@ public class GameWithDraughtsTest {
         this.game = new GameBuilder()
             .row("        ")
             .row("        ")
-            .row("        ")
+            .row("  b     ")
             .row("        ")
             .row("        ")
             .row("    n   ")

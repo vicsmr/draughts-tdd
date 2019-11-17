@@ -58,10 +58,13 @@ public class Game {
 				coordinateToRemove = coordinateToRemove.betweenDiagonal(target);
 			} while(coordinateToRemove.diagonalDistance(target) > 0 );
 		}
-		if (!isEatingMovement && eatingMovements > 0) {
+		if ((!isEatingMovement && eatingMovements > 0)) {
 			this.changeTurn();
 		} else {
 			this.doMovement(isEatingMovement, origin, target);
+			if (this.isBlocked(this.turn.getOppositeColor())) {
+				this.changeTurn();
+			}
 		}
 	}
 
@@ -128,6 +131,10 @@ public class Game {
 
 	public boolean isBlocked() {
 		return this.board.getPieces(this.turn.getColor()).isEmpty();
+	}
+
+	public boolean isBlocked(Color color) {
+		return this.board.getPieces(color).isEmpty();
 	}
 
 	public int getDimension() {

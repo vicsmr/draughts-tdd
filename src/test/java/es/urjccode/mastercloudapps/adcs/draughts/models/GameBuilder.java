@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class GameBuilder {
+public class GameBuilder {
 
     private List<String> rowsGame;
 
-    GameBuilder() {
+    public GameBuilder() {
         this.rowsGame = new ArrayList<String>();
     }
 
