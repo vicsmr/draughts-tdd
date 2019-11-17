@@ -42,9 +42,7 @@ public class PlayControllerTest {
         State state = new State();
         state.next();
         PlayController playController = new PlayController(game, state);
-        Coordinate origin = new Coordinate(4, 0);
-        Coordinate target = new Coordinate(2, 2);
-        playController.move(origin, target);
+        playController.move(new Coordinate(4, 0), new Coordinate(2, 2));
         assertEquals(StateValue.FINAL, state.getValueState());
     }
 
