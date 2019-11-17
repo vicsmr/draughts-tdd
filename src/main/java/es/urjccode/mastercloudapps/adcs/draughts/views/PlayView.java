@@ -9,6 +9,8 @@ class PlayView extends SubView {
     private static final String[] COLORS = { "blancas", "negras" };
     private static final String MESSAGE = "Derrota!!! No puedes mover tus fichas!!!";
     private static final String FORMAT = "xx.xx";
+    private static final String FORMAT_ERROR = "Error!!! Formato incorrecto";
+    private static final String MOVE = "Mueven las ";
 
     PlayView() {
         super();
@@ -22,9 +24,9 @@ class PlayView extends SubView {
         do {
             error = null;
             String color = PlayView.COLORS[playController.getColor().ordinal()];
-            String format = this.console.readString("Mueven las " + color + ": ");
+            String format = this.console.readString(PlayView.MOVE+ color + ": ");
             if (format.length() != PlayView.FORMAT.length()) {
-                this.console.write("Error!!! Formato incorrecto");
+                this.console.write(PlayView.FORMAT_ERROR);
                 error = Error.BAD_FORMAT;
             } else {
                 origin = Coordinate.getInstance(format.substring(0, 2));
