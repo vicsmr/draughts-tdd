@@ -2,6 +2,8 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Test;
 
 public class GameTest {
@@ -134,7 +136,7 @@ public class GameTest {
         Coordinate secondTarget = new Coordinate(0, 4);
         Game game = new GameBuilder()
             .row("        ")
-            .row("   n     ")
+            .row("   n    ")
             .row("        ")
             .row(" n      ")
             .row("b       ")
@@ -145,6 +147,28 @@ public class GameTest {
         game.move(origin, target);
         game.move(target, secondTarget);
         assertEquals(Color.WHITE, this.game.getColor());
+    }
+
+    @Test
+    public void testGivenGameWhenMovementPawnEatingPieceAndMovementWithoutEatingTheChangeTurnAndTheMovementNotWork() {
+        Coordinate origin = new Coordinate(4, 0);
+        Coordinate target = new Coordinate(2, 2);
+        Coordinate secondTarget = new Coordinate(1, 3);
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row(" n      ")
+            .row("b       ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .build();
+        game.move(origin, target);
+        game.move(target, secondTarget);
+        assertNull(game.getPiece(secondTarget));
+        assertNotNull(game.getPiece(target));
+        assertEquals(Color.BLACK, game.getColor());
     }
 
     @Test
